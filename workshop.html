@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real world fetch</title>
+  </head>
+  <body>
+<h1>Pokemon Search</h1>
+    <form action="">
+      <input type="text" name="Pokemon" id="Pokemon">
+      <input type="submit" id="submit">
+    </form>
+    <img id="pokeImg" src="" alt="">
+    <script>
+// challenge 1
+      // function checkOk(ok,status){
+      //   if(ok == false){
+      //     throw new Error(status);
+      //   } 
+      // }
+
+      // fetch("https://echo.oliverjam.workers.dev/status/404")
+      // .then((data) => data)
+      // .then((data) => {(checkOk(data.ok,data.status))
+      //   throw new Error(data.status);
+      // })
+      // .catch((error) => console.log(error))
+
+      // Challenge 2
+      // const data = {
+      //   username: "skarzcode",
+      //   password: "**************"
+      // }
+      // fetch("https://echo.oliverjam.workers.dev/json",{
+      //   method: "POST",
+      //   body: JSON.stringify(data),
+      //   headers: {'Content-Type': 'application/json'}
+      // })
+      // .then((data) =>{
+      //   if(!data.ok){
+      //     const error = new Error(data.status);
+      //   throw error;
+      //   } 
+      //   return(data.json())
+      // })
+      // .then((res) => console.log(res))
+      // .catch(error => console.log(error))
+
+      // challenge 3
+//       const myForm = document.querySelector("form");
+
+//   myForm.addEventListener("submit", event => {
+//   event.preventDefault();
+//   // handle the submission yourself here
+// const data = {
+// userername: document.querySelector("#username").value,
+// password: document.querySelector("#password").value,
+//   }
+
+//   fetch("https://echo.oliverjam.workers.dev/json",{
+//         method: "POST",
+//         body: JSON.stringify(data),
+//         headers: {'Content-Type': 'application/json'}
+//       })
+//       .then((data) =>{
+//         if(!data.ok){
+//           const error = new Error(data.status);
+//         throw error;
+//         } 
+//         return(data.json())
+//       })
+//       .then((res) => console.log(res))
+//       .catch(error => console.log(error))
+// })
+//   
+
+// challenge 4
+// const btn = document.querySelector('#submit');
+// const form = document.querySelector('form');
+
+// btn.addEventListener('click', (e) => {
+//     // prevent the form from submitting
+//     e.preventDefault();
+//     const formData = new FormData(form);
+//   const obj = Object.fromEntries(formData.entries());
+// fetch("https://echo.oliverjam.workers.dev/json",{
+//   method: "POST",
+//   headers: {'Content-Type': 'application/json'},
+//   body: JSON.stringify(obj)
+// })
+// .then((Response) => {
+//   if(!Response.ok){
+//     const error = new error(Response.status)
+//     throw error;
+//   } 
+//   return Response.json();
+// })
+// .then((data) => console.log(data))
+// .catch((error) => console.log(error))
+// })
+
+// workshop
+const pokeImg = document.querySelector("#pokeImg");
+const form = document.querySelector('form');
+const btn = document.querySelector('#submit');
+btn.addEventListener('click', (e) => {
+
+    // // prevent the form from submitting
+    e.preventDefault();
+    const formdata = new FormData(form)
+    const obj = Object.fromEntries(formdata)
+fetch(`https://pokeapi.co/api/v2/pokemon/${obj.Pokemon}`)
+.then((Response) => {
+  if(!Response.ok) {
+    const error = new Error(Response.status)
+    throw error;
+  }
+  return Response.json();
+})
+.then((data) => console.log(data))
+.catch((error) => console.log(error, "Pokemon Not Found"))
+})
+
+// data.sprites.front_default
+</script>
+  </body>
+</html>
