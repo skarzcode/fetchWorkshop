@@ -11,8 +11,8 @@
       <input type="text" name="Pokemon" id="Pokemon">
       <input type="submit" id="submit">
     </form>
+    <h1 id="Response"></h1>
     <img id="pokeImg" src="" alt="">
-    <p id="Response"></p>
     <script>
 // challenge 1
       // function checkOk(ok,status){
@@ -105,6 +105,17 @@
 const pokeImg = document.querySelector("#pokeImg");
 const form = document.querySelector('form');
 const btn = document.querySelector('#submit');
+const pokename = document.querySelector('#Response');
+function populateDom(data){
+pokeImg.src = data.sprites.front_default;
+pokename.innerHTML = data.name 
+}
+
+function clearDom(){
+pokeImg.src = "";
+pokename.innerHTML = "No Results Found" ;
+}
+
 btn.addEventListener('click', (e) => {
 
     // // prevent the form from submitting
@@ -119,8 +130,8 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${obj.Pokemon}`)
   }
   return Response.json();
 })
-.then((data) => console.log(data))
-.catch((error) => console.log(error, "Pokemon Not Found"))
+.then((data) => populateDom(data))
+.catch((error) => clearDom())
 })
 
 // data.sprites.front_default
